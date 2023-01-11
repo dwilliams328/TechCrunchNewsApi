@@ -11,10 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.techcrunchnewsapi.R
 import com.example.techcrunchnewsapi.business.models.NewsArticle
-import com.example.techcrunchnewsapi.business.models.TechCrunch
 import com.example.techcrunchnewsapi.databinding.FragmentFirstBinding
-import com.example.techcrunchnewsapi.di.TechCrunchInjector
-import javax.inject.Inject
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.

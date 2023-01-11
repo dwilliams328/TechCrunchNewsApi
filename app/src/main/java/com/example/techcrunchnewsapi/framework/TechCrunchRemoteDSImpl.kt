@@ -3,7 +3,6 @@ package com.example.techcrunchnewsapi.framework
 import com.example.techcrunchnewsapi.business.models.TechCrunch
 import com.example.techcrunchnewsapi.business.models.TechCrunchRemoteDS
 import com.example.techcrunchnewsapi.network.ApiService
-import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

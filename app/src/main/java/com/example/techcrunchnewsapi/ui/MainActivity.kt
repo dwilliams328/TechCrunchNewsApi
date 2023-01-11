@@ -10,9 +10,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
-import androidx.lifecycle.ViewModelProvider
 import com.example.techcrunchnewsapi.R
-import com.example.techcrunchnewsapi.business.models.NewsArticle
 import com.example.techcrunchnewsapi.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

@@ -1,6 +1,6 @@
 package com.example.techcrunchnewsapi.network
 
-import retrofit2.CallAdapter.Factory
+
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory

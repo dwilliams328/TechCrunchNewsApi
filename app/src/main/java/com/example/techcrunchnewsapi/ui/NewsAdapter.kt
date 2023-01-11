@@ -9,7 +9,7 @@ import com.example.techcrunchnewsapi.databinding.ItemViewArticleBinding
 
 class NewsAdapter(private val newsClickListener: NewsClickListener) :
     RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
-    var newsList: List<NewsArticle> = mutableListOf(
+    private var newsList: List<NewsArticle> = mutableListOf(
         NewsArticle(
             "David",
             "Title1",
