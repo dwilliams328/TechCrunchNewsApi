@@ -21,7 +21,6 @@ class FirstFragment : Fragment() {
     private lateinit var _binding: FragmentFirstBinding
     private lateinit var bundle: Bundle
     private val viewModel: MainViewModel by activityViewModels()
-    private lateinit var uiData: List<NewsArticle>
 
 
     private var newsClickListener = object : NewsAdapter.NewsClickListener {
@@ -40,9 +39,7 @@ class FirstFragment : Fragment() {
         val adapter = NewsAdapter(newsClickListener)
 
         _binding.rvFirst.adapter = adapter
-        viewModel.newsArticle.observe(viewLifecycleOwner) {
-            adapter.setNewsItems(it)
-        }
+        adapter.setNewsItems(viewModel.newsArticle.value) // TODO: Data loading, but ui not updating. Reproduce -> navigate 2nd Fragment & back to 1st Fragment
 
         return _binding.root
     }

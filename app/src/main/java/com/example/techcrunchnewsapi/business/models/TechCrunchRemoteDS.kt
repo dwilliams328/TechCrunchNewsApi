@@ -1,8 +1,7 @@
 package com.example.techcrunchnewsapi.business.models
 
-import io.reactivex.Observable
-import io.reactivex.Single
+import retrofit2.Response
 
 interface TechCrunchRemoteDS {
-    fun getNewsArticles(): Single<TechCrunch>
+    suspend fun getNewsArticles(): Response<TechCrunch>
 }

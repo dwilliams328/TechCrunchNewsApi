@@ -14,8 +14,6 @@ import com.example.techcrunchnewsapi.R
 import com.example.techcrunchnewsapi.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    private val viewModel: MainViewModel by viewModels()
-
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding

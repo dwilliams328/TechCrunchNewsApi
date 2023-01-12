@@ -1,17 +1,17 @@
 package com.example.techcrunchnewsapi.ui
 
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.techcrunchnewsapi.business.models.NewsArticle
-import com.example.techcrunchnewsapi.business.models.TechCrunch
 import com.example.techcrunchnewsapi.business.models.TechCrunchRepository
 import com.example.techcrunchnewsapi.di.TechCrunchInjector
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import io.reactivex.observers.DisposableSingleObserver
-import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MainViewModel : ViewModel() {
@@ -23,35 +23,24 @@ class MainViewModel : ViewModel() {
 
     @Inject
     lateinit var repository: TechCrunchRepository
-    private var _newArticle: MutableLiveData<List<NewsArticle>> = MutableLiveData<List<NewsArticle>>() // Use dto-> converter -> uiModel.. also expose Live Data not mutable
-    var newsArticle: LiveData<List<NewsArticle>> = _newArticle
-
-    private lateinit var disposable: Disposable
-
-    private fun getNewsArticles() {
-        disposable = repository.getNewsArticles().subscribeOn(Schedulers.io())
-            .subscribeOn(AndroidSchedulers.mainThread())
-            .subscribeWith(object : DisposableSingleObserver<TechCrunch>() {
-                override fun onSuccess(t: TechCrunch) {
-                    _newArticle.postValue(t.articles)
-                }
-
-                override fun onError(e: Throwable) {
-                    Log.d("abc", "look here for error")
-                    _newArticle.postValue(mutableListOf(
-                        NewsArticle(
+    private var _newArticle: MutableStateFlow<List<NewsArticle>> = MutableStateFlow(
+                                mutableListOf(NewsArticle(
                             "David",
                             "Title4",
                             "desc of title4",
                             "https://techcrunch.com/wp-content/uploads/2022/04/tiktok-header.webp"
-                        )))
+                        ))
+    ) // Use dto-> converter -> uiModel.. also expose Live Data not mutable
+    var newsArticle: StateFlow<List<NewsArticle>> = _newArticle.asStateFlow()
+
+    private fun getNewsArticles() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val async1 = async { repository.getNewsArticles() }
+            async1.await().let { techCrunchFlow ->
+                techCrunchFlow.collect {
+                    _newArticle.value = it.articles
                 }
-            })
+            }
+        }
     }
-
-    override fun onCleared() {
-        super.onCleared()
-        disposable.dispose()
-    }
-
 }

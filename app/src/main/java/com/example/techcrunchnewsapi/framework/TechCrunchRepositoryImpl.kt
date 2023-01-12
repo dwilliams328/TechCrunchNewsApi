@@ -3,14 +3,16 @@ package com.example.techcrunchnewsapi.framework
 import com.example.techcrunchnewsapi.business.models.TechCrunch
 import com.example.techcrunchnewsapi.business.models.TechCrunchRemoteDS
 import com.example.techcrunchnewsapi.business.models.TechCrunchRepository
-import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 class TechCrunchRepositoryImpl(private val remoteDS: TechCrunchRemoteDS): TechCrunchRepository {
-    override fun getNewsArticles(): Single<TechCrunch> {
-        return remoteDS.getNewsArticles()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-    }
+
+    override suspend fun getNewsArticles(): Flow<TechCrunch> {
+        val response = remoteDS.getNewsArticles()
+            return flow {
+                response.body()?.let { emit(it) }
+            }
+        }
 }

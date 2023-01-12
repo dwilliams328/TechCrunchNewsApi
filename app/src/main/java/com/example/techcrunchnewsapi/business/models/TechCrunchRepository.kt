@@ -1,8 +1,7 @@
 package com.example.techcrunchnewsapi.business.models
 
-import io.reactivex.Observable
-import io.reactivex.Single
+import kotlinx.coroutines.flow.Flow
 
 interface TechCrunchRepository {
-    fun getNewsArticles(): Single<TechCrunch>
+    suspend fun getNewsArticles(): Flow<TechCrunch>
 }
