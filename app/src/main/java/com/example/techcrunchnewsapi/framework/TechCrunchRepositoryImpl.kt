@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.flow
 class TechCrunchRepositoryImpl(private val remoteDS: TechCrunchRemoteDS): TechCrunchRepository {
 
     override suspend fun getNewsArticles(): Flow<TechCrunch> {
+        // revisit for `Single -> Flow` conversion
         val response = remoteDS.getNewsArticles()
             return flow {
                 response.body()?.let { emit(it) }

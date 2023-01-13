@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.techcrunchnewsapi.R
 import com.example.techcrunchnewsapi.business.models.NewsArticle
 import com.example.techcrunchnewsapi.databinding.FragmentFirstBinding
+import com.google.android.material.snackbar.Snackbar
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -40,6 +41,14 @@ class FirstFragment : Fragment() {
 
         _binding.rvFirst.adapter = adapter
         adapter.setNewsItems(viewModel.newsArticle.value) // TODO: Data loading, but ui not updating. Reproduce -> navigate 2nd Fragment & back to 1st Fragment
+
+        _binding.btnRegister.setOnClickListener {
+            findNavController().navigate(R.id.action_FirstFragment_to_RegisterFragment)
+        }
+
+        _binding.btnLogin.setOnClickListener {
+            findNavController().navigate(R.id.action_FirstFragment_to_LoginFragment)
+        }
 
         return _binding.root
     }

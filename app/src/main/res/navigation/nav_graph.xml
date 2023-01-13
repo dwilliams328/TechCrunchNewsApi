@@ -14,6 +14,14 @@
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />
+
+        <action
+            android:id="@+id/action_FirstFragment_to_RegisterFragment"
+            app:destination="@id/RegisterFragment" />
+
+        <action
+            android:id="@+id/action_FirstFragment_to_LoginFragment"
+            app:destination="@id/LoginFragment" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -24,5 +32,44 @@
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/RegisterFragment"
+        android:name="com.example.techcrunchnewsapi.ui.register.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register">
+
+        <action
+            android:id="@+id/action_RegisterFragment_to_SignedInUserFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/nav_graph"
+            app:popUpToInclusive="true"
+            app:destination="@id/SignedInUserFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/SignedInUserFragment"
+        android:name="com.example.techcrunchnewsapi.ui.SignedInUserFragment"
+        android:label="fragment_signed_in_user"
+        tools:layout="@layout/fragment_signed_in_user">
+
+        <action
+            android:id="@+id/action_SignedInUserFragment_to_FirstFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/nav_graph"
+            app:popUpToInclusive="true"
+            app:destination="@id/FirstFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/LoginFragment"
+        android:name="com.example.techcrunchnewsapi.ui.login.LoginFragment"
+        android:label="LoginFragment">
+
+        <action
+            android:id="@+id/action_LoginFragment_to_SignedInUserFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/nav_graph"
+            app:popUpToInclusive="true"
+            app:destination="@id/SignedInUserFragment" />
     </fragment>
 </navigation>
