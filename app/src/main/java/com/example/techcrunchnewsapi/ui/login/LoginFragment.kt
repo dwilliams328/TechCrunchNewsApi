@@ -3,6 +3,7 @@ package com.example.techcrunchnewsapi.ui.login
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,9 +15,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.techcrunchnewsapi.R
 import com.example.techcrunchnewsapi.databinding.FragmentLoginBinding
+import com.example.techcrunchnewsapi.ui.register.SigninResult
 import com.example.techcrunchnewsapi.ui.register.UserViewModel
 import com.example.techcrunchnewsapi.ui.register.UserViewModelFactory
-import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.messaging.FirebaseMessaging
 
 
 class LoginFragment : Fragment() {
@@ -40,6 +42,10 @@ class LoginFragment : Fragment() {
         val loginButton = binding.login
         val loadingProgressBar = binding.loading
 
+        FirebaseMessaging.getInstance().token.addOnCompleteListener {
+            Log.d("abc", it.result)
+        }
+
         userViewModel.loginFormState.observe(viewLifecycleOwner,
             Observer { loginFormState ->
                 if (loginFormState == null) {
@@ -55,9 +61,12 @@ class LoginFragment : Fragment() {
             })
 
         userViewModel.loginResult.observe(viewLifecycleOwner,
-            Observer { registerResult ->
-                loadingProgressBar.visibility = View.GONE
-                updateUiWithUser(registerResult)
+            Observer { signinResult ->
+                if (signinResult.success != null) {
+                    loadingProgressBar.visibility = View.GONE
+                    updateUiWithUser(signinResult)
+                }
+
             })
 
         val afterTextChangedListener = object : TextWatcher {
@@ -96,17 +105,26 @@ class LoginFragment : Fragment() {
                 usernameEditText.text.toString(),
                 passwordEditText.text.toString()
             ){
-                loadingProgressBar.visibility = View.GONE
-                findNavController().navigate(R.id.action_LoginFragment_to_SignedInUserFragment)
+                if (it.success != null) {
+                    loadingProgressBar.visibility = View.GONE
+                    findNavController().navigate(R.id.action_LoginFragment_to_SignedInUserFragment)
+                } else {
+                    loadingProgressBar.visibility = View.GONE
+                    Toast.makeText(context, "error signing in", Toast.LENGTH_SHORT).show()
+                }
             }
 
         }
     }
 
-    private fun updateUiWithUser(model: FirebaseUser) {
-        val welcome = getString(R.string.welcome) + " " + model.email
+    private fun updateUiWithUser(model: SigninResult) {
+        val welcome = getString(R.string.welcome) + " " + model.success?.email
         // TODO : initiate successful logged in experience
         val appContext = context?.applicationContext ?: return
         Toast.makeText(appContext, welcome, Toast.LENGTH_LONG).show()
+    }
+
+    private fun showToastOnError() {
+
     }
 }

@@ -21,8 +21,8 @@ class UserViewModel(private val firebaseAuthRepository: FirebaseAuthRepository) 
     private val _loginForm = MutableLiveData<UserFormState>()
     val loginFormState: LiveData<UserFormState> = _loginForm
 
-    private val _loginResult = MutableLiveData<FirebaseUser>()
-    val loginResult: LiveData<FirebaseUser> = _loginResult
+    private val _loginResult = MutableLiveData<SigninResult>()
+    val loginResult: LiveData<SigninResult> = _loginResult
 
 
     fun register(username: String, password: String, done: () -> Unit) {
@@ -36,25 +36,26 @@ class UserViewModel(private val firebaseAuthRepository: FirebaseAuthRepository) 
 
                 }
             }
-        } catch (e: Exception){
+        } catch (e: Exception) {
             TODO("handle exception")
         }
     }
 
-    fun login(username: String, password: String, done: () -> Unit) {
-        try {
+    fun login(username: String, password: String, done: (SigninResult) -> Unit) {
             firebaseAuthRepository.login(username, password).addOnCompleteListener {
                 if (it.isSuccessful) {
-                    _loginResult.value = it.result.user
-                    done()
-                } else {
-                    Log.d("abc", it.exception?.message.toString())
-
+                    _loginResult.value = SigninResult(success = it.result.user) //it.result.user
                 }
+
+                done(SigninResult(it.result.user))
+            }.addOnFailureListener {
+
+                //TODO Fix: com.google.firebase.auth.FirebaseAuthInvalidUserException:
+                // There is no user record corresponding to this identifier. The user may have been deleted.
+                Log.d("abc", "login exception listener")
+                _loginResult.value = SigninResult(error = 0)
+                done(SigninResult(error = 0))
             }
-        } catch (e: Exception){
-            TODO("handle exception")
-        }
     }
 
 
