@@ -1,4 +1,4 @@
-package com.example.techcrunchnewsapi.ui.register
+package com.example.techcrunchnewsapi.ui.stateholders
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

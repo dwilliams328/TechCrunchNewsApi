@@ -1,7 +1,7 @@
 package com.example.techcrunchnewsapi.di
 
-import com.example.techcrunchnewsapi.business.models.TechCrunchRemoteDS
-import com.example.techcrunchnewsapi.business.models.TechCrunchRepository
+import com.example.techcrunchnewsapi.business.TechCrunchRemoteDS
+import com.example.techcrunchnewsapi.business.TechCrunchRepository
 import com.example.techcrunchnewsapi.framework.TechCrunchRemoteDSImpl
 import com.example.techcrunchnewsapi.framework.TechCrunchRepositoryImpl
 import com.example.techcrunchnewsapi.network.ApiClient

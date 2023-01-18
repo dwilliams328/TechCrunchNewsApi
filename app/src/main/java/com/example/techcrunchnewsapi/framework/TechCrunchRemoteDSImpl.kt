@@ -1,7 +1,7 @@
 package com.example.techcrunchnewsapi.framework
 
 import com.example.techcrunchnewsapi.business.models.TechCrunch
-import com.example.techcrunchnewsapi.business.models.TechCrunchRemoteDS
+import com.example.techcrunchnewsapi.business.TechCrunchRemoteDS
 import com.example.techcrunchnewsapi.network.ApiService
 import retrofit2.Response
 

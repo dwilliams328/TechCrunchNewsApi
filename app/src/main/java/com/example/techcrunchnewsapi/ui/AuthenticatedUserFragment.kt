@@ -8,21 +8,21 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.techcrunchnewsapi.R
-import com.example.techcrunchnewsapi.databinding.FragmentSignedInUserBinding
-import com.example.techcrunchnewsapi.ui.register.UserViewModelFactory
-import com.example.techcrunchnewsapi.ui.register.UserViewModel
+import com.example.techcrunchnewsapi.databinding.FragmentAuthenticatedUserBinding
+import com.example.techcrunchnewsapi.ui.stateholders.UserViewModel
+import com.example.techcrunchnewsapi.ui.stateholders.UserViewModelFactory
 import com.google.firebase.auth.FirebaseAuth
 
-class SignedInUserFragment : Fragment() {
+class AuthenticatedUserFragment : Fragment() {
     private lateinit var viewModel: UserViewModel
 
-    private lateinit var binding: FragmentSignedInUserBinding
+    private lateinit var binding: FragmentAuthenticatedUserBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentSignedInUserBinding.inflate(inflater,container,false)
+        binding = FragmentAuthenticatedUserBinding.inflate(inflater,container,false)
         viewModel = ViewModelProvider(this, UserViewModelFactory())[UserViewModel::class.java]
 
         binding.tvWelcome.text = FirebaseAuth.getInstance().currentUser?.email
@@ -34,7 +34,7 @@ class SignedInUserFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.btnLogout.setOnClickListener {
             viewModel.logout()
-            findNavController().navigate(R.id.action_SignedInUserFragment_to_FirstFragment)
+            findNavController().navigate(R.id.action_AuthenticatedUserFragment_to_ListNewsArticlesFragment)
         }
     }
 }

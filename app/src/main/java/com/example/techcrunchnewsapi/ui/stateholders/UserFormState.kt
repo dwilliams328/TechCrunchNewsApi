@@ -1,4 +1,4 @@
-package com.example.techcrunchnewsapi.ui.register
+package com.example.techcrunchnewsapi.ui.stateholders
 
 /**
  * Data validation state of the registration form.

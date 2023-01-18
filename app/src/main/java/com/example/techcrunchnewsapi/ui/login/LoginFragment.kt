@@ -16,8 +16,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.techcrunchnewsapi.R
 import com.example.techcrunchnewsapi.databinding.FragmentLoginBinding
 import com.example.techcrunchnewsapi.ui.register.SigninResult
-import com.example.techcrunchnewsapi.ui.register.UserViewModel
-import com.example.techcrunchnewsapi.ui.register.UserViewModelFactory
+import com.example.techcrunchnewsapi.ui.stateholders.UserViewModel
+import com.example.techcrunchnewsapi.ui.stateholders.UserViewModelFactory
 import com.google.firebase.messaging.FirebaseMessaging
 
 
@@ -107,7 +107,7 @@ class LoginFragment : Fragment() {
             ){
                 if (it.success != null) {
                     loadingProgressBar.visibility = View.GONE
-                    findNavController().navigate(R.id.action_LoginFragment_to_SignedInUserFragment)
+                    findNavController().navigate(R.id.action_LoginFragment_to_AuthenticatedUserFragment)
                 } else {
                     loadingProgressBar.visibility = View.GONE
                     Toast.makeText(context, "error signing in", Toast.LENGTH_SHORT).show()

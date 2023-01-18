@@ -2,7 +2,6 @@ package com.example.techcrunchnewsapi.ui.register
 
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import android.os.Bundle
 import android.text.Editable
@@ -16,6 +15,8 @@ import androidx.navigation.fragment.findNavController
 
 import com.example.techcrunchnewsapi.R
 import com.example.techcrunchnewsapi.databinding.FragmentRegisterBinding
+import com.example.techcrunchnewsapi.ui.stateholders.UserViewModel
+import com.example.techcrunchnewsapi.ui.stateholders.UserViewModelFactory
 import com.google.firebase.auth.FirebaseUser
 
 class RegisterFragment : Fragment() {
@@ -101,7 +102,7 @@ class RegisterFragment : Fragment() {
                 passwordEditText.text.toString()
             ){
                 loadingProgressBar.visibility = View.GONE
-                findNavController().navigate(R.id.action_RegisterFragment_to_SignedInUserFragment)
+                findNavController().navigate(R.id.action_RegisterFragment_to_AuthenticatedUserFragment)
             }
         }
     }

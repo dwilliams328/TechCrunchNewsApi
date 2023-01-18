@@ -1,4 +1,4 @@
-package com.example.techcrunchnewsapi.ui.register
+package com.example.techcrunchnewsapi.ui.stateholders
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -8,6 +8,7 @@ import android.util.Patterns
 import com.example.techcrunchnewsapi.data.FirebaseAuthRepository
 
 import com.example.techcrunchnewsapi.R
+import com.example.techcrunchnewsapi.ui.register.SigninResult
 import com.google.firebase.auth.FirebaseUser
 
 class UserViewModel(private val firebaseAuthRepository: FirebaseAuthRepository) : ViewModel() {

@@ -1,7 +1,7 @@
 package com.example.techcrunchnewsapi.di
 
-import com.example.techcrunchnewsapi.ui.MainViewModel
-import com.example.techcrunchnewsapi.ui.register.UserViewModel
+import com.example.techcrunchnewsapi.ui.stateholders.MainViewModel
+import com.example.techcrunchnewsapi.ui.stateholders.UserViewModel
 import dagger.Component
 import javax.inject.Singleton
 

@@ -1,8 +1,8 @@
 package com.example.techcrunchnewsapi.framework
 
 import com.example.techcrunchnewsapi.business.models.TechCrunch
-import com.example.techcrunchnewsapi.business.models.TechCrunchRemoteDS
-import com.example.techcrunchnewsapi.business.models.TechCrunchRepository
+import com.example.techcrunchnewsapi.business.TechCrunchRemoteDS
+import com.example.techcrunchnewsapi.business.TechCrunchRepository
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

@@ -1,4 +1,4 @@
-package com.example.techcrunchnewsapi.ui
+package com.example.techcrunchnewsapi.ui.newsarticles
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,14 +9,8 @@ import com.example.techcrunchnewsapi.databinding.ItemViewArticleBinding
 
 class NewsAdapter(private val newsClickListener: NewsClickListener) :
     RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
-    private var newsList: List<NewsArticle> = mutableListOf(
-        NewsArticle(
-            "David",
-            "Title1",
-            "desc of title1",
-            "https://techcrunch.com/wp-content/uploads/2022/04/tiktok-header.webp"
-        )
-    )
+
+    private var uiNewsListData: List<NewsArticle> = mutableListOf()
     private lateinit var binding: ItemViewArticleBinding
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -34,15 +28,15 @@ class NewsAdapter(private val newsClickListener: NewsClickListener) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(newsList[position], newsClickListener)
+        holder.bind(uiNewsListData[position], newsClickListener)
     }
 
     override fun getItemCount(): Int {
-        return newsList.size
+        return uiNewsListData.size
     }
 
-    fun setNewsItems(newsItem: List<NewsArticle>){
-        newsList = newsItem
+    fun setNewsList(newsList: List<NewsArticle>) {
+        uiNewsListData = newsList
         notifyDataSetChanged()
     }
 
