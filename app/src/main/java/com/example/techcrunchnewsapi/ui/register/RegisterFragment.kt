@@ -38,7 +38,7 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        userViewModel = ViewModelProvider(this, UserViewModelFactory())[UserViewModel::class.java]
+        userViewModel = ViewModelProvider(requireActivity(), UserViewModelFactory())[UserViewModel::class.java]
 
         val usernameEditText = binding.username
         val passwordEditText = binding.password

@@ -29,7 +29,7 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        userViewModel = ViewModelProvider(this, UserViewModelFactory())[UserViewModel::class.java]
+        userViewModel = ViewModelProvider(requireActivity(), UserViewModelFactory())[UserViewModel::class.java]
         binding = FragmentLoginBinding.inflate(inflater, container, false)
 
         return binding.root
@@ -43,7 +43,7 @@ class LoginFragment : Fragment() {
         val loadingProgressBar = binding.loading
 
         FirebaseMessaging.getInstance().token.addOnCompleteListener {
-            Log.d("abc", it.result)
+            Log.d("abc", "LoginFragment " + it.result)
         }
 
         userViewModel.loginFormState.observe(viewLifecycleOwner,

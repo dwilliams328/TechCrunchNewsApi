@@ -9,6 +9,7 @@ import com.example.techcrunchnewsapi.data.FirebaseAuthRepository
 
 import com.example.techcrunchnewsapi.R
 import com.example.techcrunchnewsapi.ui.register.SigninResult
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
 class UserViewModel(private val firebaseAuthRepository: FirebaseAuthRepository) : ViewModel() {
@@ -33,7 +34,7 @@ class UserViewModel(private val firebaseAuthRepository: FirebaseAuthRepository) 
                     _registerResult.value = it.result.user
                     done()
                 } else {
-                    Log.d("abc", it.exception?.message.toString())
+                    Log.d("abc", "UserViewModel" + it.exception?.message.toString())
 
                 }
             }
@@ -62,9 +63,11 @@ class UserViewModel(private val firebaseAuthRepository: FirebaseAuthRepository) 
 
     fun logout() {
         try {
+            Log.d("abc", "Invoking Logout: " + FirebaseAuth.getInstance().currentUser?.email)
             firebaseAuthRepository.logout()
+            Log.d("abc", "Logout Complete: " + FirebaseAuth.getInstance().currentUser?.email)
         } catch (e: Exception) {
-            TODO("handle exception")
+            Log.d("abc", "Logout Failed: " + FirebaseAuth.getInstance().currentUser?.email)
         }
     }
 
